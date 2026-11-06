@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tir-koridor-v12-live';
+const CACHE_NAME = 'tir-koridor-v13-live';
 
 // Kurulum aşamasında bekleme yapmadan hemen devreye gir
 self.addEventListener('install', (e) => {

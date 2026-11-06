@@ -7,8 +7,8 @@
         "id": "middle",
         "name": "Orta Koridor (Trans-Hazar / TITR)",
         "color": "#2563eb",
-        "borders": "Khorgos -> Aktau/Kuryk -> Bakü -> Tiflis -> Sarp/Türkgözü -> Kapıkule",
-        "notes": "Rusya'yı bypass eder. Hazar Denizi Ro-Ro geçişi içerir."
+        "borders": "Horgos -> Almatı -> Aktau ~ Ro-Ro ~ Bakü -> Tiflis -> Sarp -> Karadeniz Sahili -> Kapıkule",
+        "notes": "Rusya'yı bypass eden stratejik multimodal koridor."
       },
       "geometry": {
         "type": "LineString",
@@ -25,8 +25,8 @@
         "id": "north",
         "name": "Kuzey Koridoru (Avrasya)",
         "color": "#dc2626",
-        "borders": "Khorgos/Alashankou -> Astana -> Petropavl -> Moskova -> Minsk -> Brest/Koroszczyn",
-        "notes": "En hızlı kara hattıdır ancak AB/Belarus sınırında jeopolitik kısıtlamalar mevcuttur."
+        "borders": "Horgos -> Astana -> Petropavl -> Moskova (M1) -> Minsk -> Brest / Kukuryki",
+        "notes": "En hızlı karayolu aksı; Belarus-Polonya sınır kısıtlamaları geçerlidir."
       },
       "geometry": {
         "type": "LineString",
@@ -40,10 +40,10 @@
       "type": "Feature",
       "properties": {
         "id": "south",
-        "name": "Güney Koridoru (ITI - Pakistan/İran)",
+        "name": "Güney Koridoru (ITI - Pakistan/İran/Türkiye)",
         "color": "#16a34a",
-        "borders": "Karaçi/İslamabad -> Quetta -> Taftan/Mirjaveh -> Tahran -> Bazargan/Gürbulak -> Kapıkule",
-        "notes": "Güney Asya ve Körfez yükleri için kesintisiz karayolu omurgasıdır."
+        "borders": "Karaçi -> Quetta -> Taftan/Mirjaveh -> Tahran -> Bazargan/Gürbulak -> Kapıkule",
+        "notes": "Güney Asya ve Basra hinterlandını bağlayan kesintisiz tır koridoru."
       },
       "geometry": {
         "type": "LineString",
@@ -57,17 +57,52 @@
     {
       "type": "Feature",
       "properties": {
+        "id": "asia_feed",
+        "name": "Güneydoğu Asya Besleme Hattı (AH1 / AH3)",
+        "color": "#eab308",
+        "borders": "Hanoi -> Lang Son | Bangkok -> Vientiane -> Mohan -> Kunming -> Urumçi -> Horgos",
+        "notes": "Vietnam ve Tayland çıkışlı tırlar için Laos transit geçişli ana besleme aksı."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [100.50, 13.75], [102.60, 17.97], [101.68, 21.18], [102.71, 25.04],
+          [105.85, 21.02], [106.76, 21.85], [102.71, 25.04],
+          [106.55, 29.56], [108.93, 34.34], [87.61, 43.82], [80.41, 44.21]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "central_asia",
+        "name": "Orta Asya Besleme Hattı (Tacikistan / AH7)",
+        "color": "#8b5cf6",
+        "borders": "Duşanbe -> Hucend -> Oybek -> Taşkent -> Şımkent -> Horgos",
+        "notes": "Özbekistan ve Kazakistan üzerinden ana koridorlara entegrasyon."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [68.78, 38.55], [69.24, 41.29], [69.59, 42.34], [76.95, 43.22], [80.41, 44.21]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "id": "europe_dist",
-        "name": "Avrupa Dağıtım Ağı",
+        "name": "Avrupa Dağıtım Ağı (DE, DK, FR, PT)",
         "color": "#06b6d4",
         "borders": "Kapıkule -> Sofya -> Belgrad -> Budapeşte -> Viyana -> Passau -> Hamburg / Paris / Lizbon",
-        "notes": "AETR sürüş limitleri ve AB T1 transit rejimi geçerlidir."
+        "notes": "AB T1 ortak transit rejimi ve E-yolları entegrasyonu."
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
           [26.55, 41.67], [23.32, 42.69], [20.46, 44.78], [19.04, 47.49],
-          [16.37, 48.20], [13.43, 48.56], [9.99, 53.55], [2.35, 48.85], [-9.13, 38.72]
+          [16.37, 48.20], [13.43, 48.56], [9.99, 53.55], [9.43, 54.78],
+          [2.35, 48.85], [-0.57, 44.83], [-4.72, 41.65], [-9.13, 38.72]
         ]
       }
     }

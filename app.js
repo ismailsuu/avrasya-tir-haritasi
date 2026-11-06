@@ -1,175 +1,220 @@
-// Haritayı başlat
-const map = L.map('map').setView([42.0, 50.0], 4);
-
-// Tüm şehir isimlerini İngilizce/Latin gösteren Esri katmanı (Ücretsiz & Filigransız)
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-  maxZoom: 18,
-  attribution: 'Tiles &copy; Esri &mdash; Sources: Esri, TomTom'
-}).addTo(map);
-
-// TR / EN Dil Sözlüğü
-const I18N = {
+// --- SÖZLÜK (I18N) ---
+const translations = {
   tr: {
-    title: "Avrasya Tır Koridorları",
-    label: "GÜZERGÂH SEÇİN:",
-    all: "Tüm Güzergâhlar ve Ağlar",
-    btn: "EN",
-    timeLabel: "TRANSİT SÜRE:",
-    regimeLabel: "GÜMRÜK / REJİM:",
-    bordersLabel: "HAT / GEÇİŞLER:",
-    noteLabel: "OPERASYONEL NOT:",
-    routes: {
-      middle: "Orta Koridor (Trans-Hazar)",
-      north: "Kuzey Koridoru (Avrasya)",
-      south: "Güney Koridoru (ITI)",
-      asia_feed: "Güneydoğu Asya (Vietnam/Tayland)",
-      central_asia: "Orta Asya (Tacikistan/AH7)",
-      pamir_highway: "Pamir / Kulma (Çin-Tacikistan)",
-      india_feed: "Hindistan Multimodal (Deniz+Kara)",
-      europe_dist: "Avrupa Dağıtım Ağı (DE, DK, FR, PT)",
-      italy_roro: "İtalya Ro-Ro & Güney Avrupa"
-    }
+    appTitle: "Avrasya Tır Koridorları",
+    selectLabel: "KORİDOR SEÇİN:",
+    allCorridors: "Tüm Koridorlar ve Ağlar",
+    transitTime: "TRANSİT SÜRE:",
+    customs: "GÜMRÜK / REJİM:",
+    borders: "KORİDOR / SINIRLAR:",
+    note: "OPERASYONEL NOT:",
+    langBtnText: "EN" // Butona basıldığında geçilecek dil
   },
   en: {
-    title: "Eurasia Truck Corridors",
-    label: "SELECT CORRIDOR:",
-    all: "All Corridors & Networks",
-    btn: "TR",
-    timeLabel: "TRANSIT TIME:",
-    regimeLabel: "CUSTOMS / REGIME:",
-    bordersLabel: "CORRIDOR / BORDERS:",
-    noteLabel: "OPERATIONAL NOTE:",
-    routes: {
-      middle: "Middle Corridor (Trans-Caspian)",
-      north: "Northern Corridor (Eurasian)",
-      south: "Southern Corridor (ITI)",
-      asia_feed: "Southeast Asia (Vietnam/Thailand)",
-      central_asia: "Central Asia (Tajikistan/AH7)",
-      pamir_highway: "Pamir / Kulma Pass (China-Tajik)",
-      india_feed: "India Multimodal (Sea+Road)",
-      europe_dist: "Europe Distribution Network",
-      italy_roro: "Italy Ro-Ro & Southern Europe"
-    }
+    appTitle: "Eurasia Truck Corridors",
+    selectLabel: "SELECT CORRIDOR:",
+    allCorridors: "All Corridors & Networks",
+    transitTime: "TRANSIT TIME:",
+    customs: "CUSTOMS / REGIME:",
+    borders: "CORRIDOR / BORDERS:",
+    note: "OPERATIONAL NOTE:",
+    langBtnText: "TR"
   }
 };
 
-let currentLang = 'tr';
-let routeLayer = null;
-let geojsonData = null;
+let currentLang = 'en'; // Başlangıç dili
+let map;
+let geoJsonLayer;
+let corridorsData = null;
 
-// Menüyü doldur
-function populateSelect() {
-  const select = document.getElementById('routeSelect');
-  if (!select || !geojsonData) return;
+// --- HARİTA BAŞLATMA ---
+document.addEventListener("DOMContentLoaded", () => {
+  initMap();
+  initEvents();
+  loadData();
+});
 
-  const currentVal = select.value || 'all';
-  select.innerHTML = '';
-
-  const optAll = document.createElement('option');
-  optAll.value = 'all';
-  optAll.innerText = I18N[currentLang].all;
-  select.appendChild(optAll);
-
-  geojsonData.features.forEach(f => {
-    const id = f.properties.id;
-    const opt = document.createElement('option');
-    opt.value = id;
-    opt.innerText = I18N[currentLang].routes[id] || f.properties.name;
-    select.appendChild(opt);
+function initMap() {
+  map = L.map('map', {
+    center: [45.0, 55.0],
+    zoom: 4,
+    minZoom: 3
   });
 
-  select.value = currentVal;
-  document.getElementById('uiTitle').innerText = I18N[currentLang].title;
-  document.getElementById('uiLabel').innerText = I18N[currentLang].label;
-  document.getElementById('langToggle').innerText = I18N[currentLang].btn;
+  // Esri World Street Map (Latin / Global Etiketli Temiz Altlık)
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Sources: Esri, TomTom',
+    maxZoom: 18
+  }).addTo(map);
 }
 
-// Popup içeriği oluştur (Süre ve Gümrük Rejimi Bilgisi Eklendi)
-function createPopupContent(props) {
-  const t = I18N[currentLang];
-  const routeName = t.routes[props.id] || props.name;
+// --- POPUP İÇERİK OLUŞTURUCU ---
+function buildPopupContent(props, lang) {
+  const t = translations[lang];
+
+  const title = lang === 'tr' ? props.name_tr : props.name_en;
+  const transit = lang === 'tr' ? props.transit_time_tr : props.transit_time_en;
+  const customs = lang === 'tr' ? props.customs_tr : props.customs_en;
+  const borders = lang === 'tr' ? props.borders_tr : props.borders_en;
+  const note = lang === 'tr' ? props.note_tr : props.note_en;
 
   return `
-    <div style="font-family:sans-serif; min-width:240px; line-height:1.4;">
-      <div style="font-size:14px; font-weight:bold; color:${props.color}; margin-bottom:6px;">
-        ${routeName}
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.45; min-width: 260px;">
+      <h3 style="color: #dc2626; margin: 0 0 10px 0; font-size: 15px; font-weight: 700;">
+        ${title}
+      </h3>
+      <div style="background: #f1f5f9; padding: 6px 10px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; font-weight: 700; color: #1e293b;">
+        <span>${t.transitTime}</span>
+        <span>${transit}</span>
       </div>
-      <div style="display:flex; justify-content:space-between; background:#f1f5f9; padding:5px 8px; border-radius:5px; margin-bottom:6px;">
-        <span style="font-size:11px; font-weight:bold; color:#475569;">${t.timeLabel}</span>
-        <span style="font-size:12px; font-weight:bold; color:#0f172a;">${props.time || '-'}</span>
+      <div style="margin-bottom: 8px;">
+        <span style="font-weight: 700; color: #475569; font-size: 11px; display: block; text-transform: uppercase;">${t.customs}</span>
+        <span style="color: #1e293b;">${customs}</span>
       </div>
-      <div style="margin-bottom:6px;">
-        <span style="font-size:10px; font-weight:bold; color:#64748b;">${t.regimeLabel}</span><br>
-        <span style="font-size:11px; color:#334155; font-weight:500;">${props.regime || '-'}</span>
-      </div>
-      <div style="margin-bottom:6px;">
-        <span style="font-size:10px; font-weight:bold; color:#64748b;">${t.bordersLabel}</span><br>
-        <span style="font-size:11px; color:#1e293b;">${props.borders}</span>
+      <div style="margin-bottom: 8px;">
+        <span style="font-weight: 700; color: #475569; font-size: 11px; display: block; text-transform: uppercase;">${t.borders}</span>
+        <span style="color: #334155;">${borders}</span>
       </div>
       <div>
-        <span style="font-size:10px; font-weight:bold; color:#64748b;">${t.noteLabel}</span><br>
-        <span style="font-size:11px; color:#475569;">${props.notes}</span>
+        <span style="font-weight: 700; color: #475569; font-size: 11px; display: block; text-transform: uppercase;">${t.note}</span>
+        <span style="color: #475569;">${note}</span>
       </div>
     </div>
   `;
 }
 
-// Çizgileri render et
-function renderRoutes() {
-  if (routeLayer) {
-    map.removeLayer(routeLayer);
+// --- VERİYİ ÇEKME VE ÇİZME ---
+function loadData() {
+  fetch('corridors.geojson')
+    .then(res => res.json())
+    .then(data => {
+      corridorsData = data;
+      renderGeoJson();
+      populateDropdown();
+      updateUI();
+    })
+    .catch(err => console.error("GeoJSON yüklenemedi:", err));
+}
+
+function renderGeoJson() {
+  if (geoJsonLayer) {
+    map.removeLayer(geoJsonLayer);
   }
 
-  routeLayer = L.geoJSON(geojsonData, {
-    style: feature => ({
+  geoJsonLayer = L.geoJSON(corridorsData, {
+    style: (feature) => ({
       color: feature.properties.color || '#2563eb',
       weight: 4,
       opacity: 0.85
     }),
     onEachFeature: (feature, layer) => {
-      layer.bindPopup(createPopupContent(feature.properties));
+      layer.bindPopup(buildPopupContent(feature.properties, currentLang));
+      
+      // Çizgiye tıklandığında seçimi ve açılır kutuyu senkronize et
+      layer.on('click', () => {
+        const select = document.getElementById('corridor-select');
+        if (select) select.value = feature.properties.id;
+      });
     }
   }).addTo(map);
-
-  filterRoutes();
 }
 
-// Menü filtresi
-function filterRoutes() {
-  const select = document.getElementById('routeSelect');
-  if (!select || !routeLayer) return;
-  const selected = select.value;
+// --- DİL VE ARAYÜZ YÖNETİMİ ---
+function updateUI() {
+  const t = translations[currentLang];
 
-  routeLayer.eachLayer(layer => {
-    if (selected === 'all' || layer.feature.properties.id === selected) {
-      layer.setStyle({ opacity: 0.85, weight: 4 });
-      if (selected !== 'all' && layer.feature.properties.id === selected) {
-        map.fitBounds(layer.getBounds(), { padding: [40, 40] });
+  // Sol panel metinleri
+  const titleEl = document.getElementById('app-title');
+  if (titleEl) titleEl.innerText = t.appTitle;
+
+  const selectLabelEl = document.getElementById('select-label');
+  if (selectLabelEl) selectLabelEl.innerText = t.selectLabel;
+
+  const langBtn = document.getElementById('lang-btn');
+  if (langBtn) langBtn.innerText = t.langBtnText;
+
+  // Dropdown seçeneklerini mevcut dille güncelle
+  populateDropdown();
+
+  // Haritadaki tüm katmanların popup içeriklerini güncelle
+  if (geoJsonLayer) {
+    geoJsonLayer.eachLayer(layer => {
+      if (layer.feature && layer.feature.properties) {
+        layer.setPopupContent(buildPopupContent(layer.feature.properties, currentLang));
       }
-    } else {
-      layer.setStyle({ opacity: 0, weight: 0 });
+    });
+  }
+
+  // Ekranda o an AÇIK bir popup varsa canlı olarak içeriğini yenile
+  map.eachLayer(layer => {
+    if (layer.getPopup && layer.isPopupOpen && layer.isPopupOpen() && layer.feature) {
+      layer.getPopup().setContent(buildPopupContent(layer.feature.properties, currentLang));
+      layer.getPopup().update();
     }
   });
-
-  if (selected === 'all') {
-    map.setView([42.0, 50.0], 4);
-  }
 }
 
-// Veriyi yükle
-fetch('./corridors.geojson')
-  .then(res => res.json())
-  .then(data => {
-    geojsonData = data;
-    populateSelect();
-    renderRoutes();
+function populateDropdown() {
+  const select = document.getElementById('corridor-select');
+  if (!select || !corridorsData) return;
 
-    document.getElementById('routeSelect').addEventListener('change', filterRoutes);
+  const currentSelection = select.value || 'all';
+  const t = translations[currentLang];
 
-    document.getElementById('langToggle').addEventListener('click', () => {
+  select.innerHTML = `<option value="all">${t.allCorridors}</option>`;
+
+  corridorsData.features.forEach(f => {
+    const p = f.properties;
+    const name = currentLang === 'tr' ? p.name_tr : p.name_en;
+    const option = document.createElement('option');
+    option.value = p.id;
+    option.textContent = name;
+    select.appendChild(option);
+  });
+
+  select.value = currentSelection;
+}
+
+// --- OLAY DİNLEYİCİLERİ ---
+function initEvents() {
+  // Dil Değiştirme Butonu
+  const langBtn = document.getElementById('lang-btn');
+  if (langBtn) {
+    langBtn.addEventListener('click', () => {
       currentLang = currentLang === 'tr' ? 'en' : 'tr';
-      populateSelect();
-      renderRoutes();
+      updateUI();
     });
-  })
-  .catch(err => console.error("Hata:", err));
+  }
+
+  // Koridor Filtreleme (Dropdown)
+  const select = document.getElementById('corridor-select');
+  if (select) {
+    select.addEventListener('change', (e) => {
+      const selectedId = e.target.value;
+
+      if (!geoJsonLayer) return;
+
+      if (selectedId === 'all') {
+        geoJsonLayer.eachLayer(layer => {
+          layer.setStyle({ opacity: 0.85, weight: 4 });
+        });
+        map.fitBounds(geoJsonLayer.getBounds(), { padding: [30, 30] });
+      } else {
+        let targetBounds = null;
+        geoJsonLayer.eachLayer(layer => {
+          if (layer.feature.properties.id === selectedId) {
+            layer.setStyle({ opacity: 1, weight: 6 });
+            targetBounds = layer.getBounds();
+            layer.openPopup();
+          } else {
+            layer.setStyle({ opacity: 0.15, weight: 2 });
+          }
+        });
+
+        if (targetBounds) {
+          map.fitBounds(targetBounds, { padding: [50, 50] });
+        }
+      }
+    });
+  }
+}

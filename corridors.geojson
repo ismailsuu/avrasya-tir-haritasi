@@ -26,7 +26,7 @@
         "name": "Kuzey Koridoru (Avrasya)",
         "color": "#dc2626",
         "borders": "Horgos -> Astana -> Petropavl -> Moskova (M1) -> Minsk -> Brest / Kukuryki",
-        "notes": "En hızlı karayolu aksı; Belarus-Polonya sınır kısıtlamaları geçerlidir."
+        "notes": "En hızlı karayolu aksı; Belarus-Polonya sınır kısıtlamaları mevcuttur."
       },
       "geometry": {
         "type": "LineString",
@@ -91,6 +91,38 @@
     {
       "type": "Feature",
       "properties": {
+        "id": "pamir_highway",
+        "name": "Pamir / Kulma Koridoru (Çin - Tacikistan)",
+        "color": "#ec4899",
+        "borders": "Kaşgar (Çin) -> Kulma Geçidi (Sınır) -> Murghab -> Horoğ -> Duşanbe",
+        "notes": "Alternatif yüksek irtifa dağ koridoru (AH Pamir otoyolu)."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [75.99, 39.47], [74.80, 38.15], [73.96, 38.17], [71.55, 37.49], [68.78, 38.55]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "india_feed",
+        "name": "Hindistan Multimodal Besleme Aksı",
+        "color": "#f97316",
+        "borders": "Mumbai / Nhava Sheva Limanı ~ Denizyolu ~ Bender Abbas / Çabahar Limanı -> Yezd -> Tahran",
+        "notes": "Wagah sınır engeli nedeniyle yükler Basra Körfezi Ro-Ro/Konteyner ile İran kara ağına aktarılır."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [72.87, 19.07], [64.00, 22.00], [56.27, 27.18], [54.37, 31.89], [51.38, 35.68]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "id": "europe_dist",
         "name": "Avrupa Dağıtım Ağı (DE, DK, FR, PT)",
         "color": "#06b6d4",
@@ -103,6 +135,23 @@
           [26.55, 41.67], [23.32, 42.69], [20.46, 44.78], [19.04, 47.49],
           [16.37, 48.20], [13.43, 48.56], [9.99, 53.55], [9.43, 54.78],
           [2.35, 48.85], [-0.57, 44.83], [-4.72, 41.65], [-9.13, 38.72]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "italy_roro",
+        "name": "İtalya Ro-Ro ve Güney Avrupa Hattı",
+        "color": "#10b981",
+        "borders": "Yalova/Pendik Limanı ~ Akdeniz Ro-Ro ~ Trieste Limanı -> Milano -> Mont Blanc -> Lyon / Paris",
+        "notes": "Balkan kara sınır kuyruklarını ve geçiş izinlerini (Dozvola) baypas eden intermodal tır aksı."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [29.28, 40.87], [26.00, 39.50], [21.00, 37.00], [18.00, 40.00], [13.77, 45.65],
+          [9.19, 45.46], [6.86, 45.92], [4.83, 45.76], [2.35, 48.85]
         ]
       }
     }

@@ -4,43 +4,106 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Orta Koridor (Trans-Hazar)",
-        "type": "middle",
-        "borders": "Kapıkule (TR/BG) -> Sarp (TR/GE) -> Bakü (AZ) -> Aktau/Türkmenbaşı -> Almatı -> Horgos (KZ/CN)"
+        "id": "middle",
+        "name": "Orta Koridor (Trans-Hazar / TITR)",
+        "color": "#2563eb",
+        "borders": "Khorgos -> Aktau/Kuryk -> Bakü -> Tiflis -> Sarp/Türkgözü -> Kapıkule",
+        "notes": "Rusya'yı bypass eder. Hazar Denizi Ro-Ro geçişi içerir."
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [26.55, 41.67],
-          [28.97, 41.00],
-          [32.85, 39.93],
-          [41.55, 41.52],
-          [44.78, 41.71],
-          [49.86, 40.40],
-          [51.16, 43.65],
-          [69.59, 42.34],
-          [76.95, 43.22],
-          [80.41, 44.21]
+          [80.41, 44.21], [76.95, 43.22], [51.16, 43.65],
+          [49.86, 40.40], [44.78, 41.71], [41.55, 41.52],
+          [39.72, 41.00], [32.85, 39.93], [28.97, 41.00], [26.55, 41.67]
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "Kuzey Koridoru",
-        "type": "north",
-        "borders": "Polonya/Belarus -> Moskova -> Çelyabinsk -> Manzhouli (RU/CN)"
+        "id": "north",
+        "name": "Kuzey Koridoru (Avrasya)",
+        "color": "#dc2626",
+        "borders": "Khorgos/Alashankou -> Astana -> Petropavl -> Moskova -> Minsk -> Brest/Koroszczyn",
+        "notes": "En hızlı kara hattıdır ancak AB/Belarus sınırında jeopolitik kısıtlamalar mevcuttur."
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [21.01, 52.23],
-          [27.56, 53.90],
-          [37.61, 55.75],
-          [61.40, 55.16],
-          [82.93, 55.00],
-          [104.30, 52.28],
-          [117.43, 49.58]
+          [80.41, 44.21], [71.43, 51.16], [69.15, 54.87],
+          [61.40, 55.16], [37.61, 55.75], [27.56, 53.90], [23.68, 52.09]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "south",
+        "name": "Güney Koridoru (İslamabad-Tahran-İstanbul / ITI)",
+        "color": "#16a34a",
+        "borders": "Karaçi/İslamabad -> Quetta -> Taftan/Mirjaveh -> Tahran -> Bazargan/Gürbulak -> Kapıkule",
+        "notes": "Güney Asya ve Körfez yükleri için kesintisiz karayolu omurgasıdır."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [67.00, 24.86], [66.97, 30.17], [61.58, 28.97],
+          [51.38, 35.68], [46.29, 38.08], [44.38, 39.40],
+          [39.93, 39.75], [32.85, 39.93], [28.97, 41.00], [26.55, 41.67]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "asia_feed",
+        "name": "Güneydoğu Asya Besleme Hattı (AH1 / AH3)",
+        "color": "#eab308",
+        "borders": "Hanoi/Hayfong -> Lang Son (Huu Nghi) | Bangkok -> Vientiane/Boten -> Mohan -> Kunming/Urumçi",
+        "notes": "Myanmar siyasi durumu nedeniyle Laos transit hattı kullanılır."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [100.50, 13.75], [102.60, 17.97], [101.68, 21.18], [102.71, 25.04],
+          [105.85, 21.02], [106.76, 21.85], [102.71, 25.04],
+          [106.55, 29.56], [108.93, 34.34], [87.61, 43.82], [80.41, 44.21]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "central_asia",
+        "name": "Orta Asya Besleme Hattı (AH7 / Tacikistan)",
+        "color": "#8b5cf6",
+        "borders": "Duşanbe -> Oybek/Fatihobod -> Taşkent -> Şımkent -> Khorgos",
+        "notes": "Doğu alternatifinde Kulma Geçidi üzerinden Kaşgar bağlantısı bulunur."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [68.78, 38.55], [69.24, 41.29], [69.59, 42.34], [76.95, 43.22], [80.41, 44.21]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "europe_dist",
+        "name": "Avrupa Dağıtım Ağı (Almanya, Danimarka, Fransa, Portekiz)",
+        "color": "#06b6d4",
+        "borders": "Kapıkule -> Sofya -> Belgrad -> Budapeşte -> Viyana -> Passau -> Hamburg -> Danimarka / Fransa / Portekiz",
+        "notes": "AETR sürüş limitleri ve AB T1 transit rejimi geçerlidir."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [26.55, 41.67], [23.32, 42.69], [20.46, 44.78], [19.04, 47.49],
+          [16.37, 48.20], [13.43, 48.56], [9.99, 53.55], [9.43, 54.78],
+          [13.43, 48.56], [7.00, 49.23], [2.35, 48.85], [-0.57, 44.83],
+          [-4.72, 41.65], [-6.96, 40.59], [-9.13, 38.72]
         ]
       }
     }

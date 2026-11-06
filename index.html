@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Avrasya Tır Koridorları PWA</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1e293b">
+  
+  <!-- Leaflet Harita Kütüphanesi -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: sans-serif; }
+    #map { height: 100vh; width: 100vw; }
+    .control-panel {
+      position: absolute; top: 10px; left: 10px; z-index: 1000;
+      background: rgba(30, 41, 59, 0.9); color: white; padding: 12px;
+      border-radius: 8px; backdrop-filter: blur(4px); max-width: 280px;
+    }
+    select, button { width: 100%; padding: 8px; margin-top: 6px; border-radius: 4px; border: none; }
+  </style>
+</head>
+<body>
+
+  <div class="control-panel">
+    <h3 style="margin:0 0 8px 0; font-size:16px;">Avrasya Tır Ağı</h3>
+    <label for="routeSelect">Koridor Seçin:</label>
+    <select id="routeSelect">
+      <option value="all">Tüm Güzergâhlar</option>
+      <option value="middle">Orta Koridor (Trans-Hazar)</option>
+      <option value="north">Kuzey Koridoru</option>
+      <option value="south">Güney Koridoru (İran-Pakistan)</option>
+    </select>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+</body>
+</html>

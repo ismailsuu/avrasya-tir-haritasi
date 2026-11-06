@@ -14,8 +14,10 @@ const I18N = {
     label: "GÜZERGÂH SEÇİN:",
     all: "Tüm Güzergâhlar ve Ağlar",
     btn: "EN",
+    timeLabel: "TRANSİT SÜRE:",
+    regimeLabel: "GÜMRÜK / REJİM:",
     bordersLabel: "HAT / GEÇİŞLER:",
-    noteLabel: "NOT / PARAMETRE:",
+    noteLabel: "OPERASYONEL NOT:",
     routes: {
       middle: "Orta Koridor (Trans-Hazar)",
       north: "Kuzey Koridoru (Avrasya)",
@@ -33,8 +35,10 @@ const I18N = {
     label: "SELECT CORRIDOR:",
     all: "All Corridors & Networks",
     btn: "TR",
+    timeLabel: "TRANSIT TIME:",
+    regimeLabel: "CUSTOMS / REGIME:",
     bordersLabel: "CORRIDOR / BORDERS:",
-    noteLabel: "NOTES / PARAMETERS:",
+    noteLabel: "OPERATIONAL NOTE:",
     routes: {
       middle: "Middle Corridor (Trans-Caspian)",
       north: "Northern Corridor (Eurasian)",
@@ -80,23 +84,31 @@ function populateSelect() {
   document.getElementById('langToggle').innerText = I18N[currentLang].btn;
 }
 
-// Popup içeriği oluştur
+// Popup içeriği oluştur (Süre ve Gümrük Rejimi Bilgisi Eklendi)
 function createPopupContent(props) {
   const t = I18N[currentLang];
   const routeName = t.routes[props.id] || props.name;
 
   return `
-    <div style="font-family:sans-serif; min-width:220px; line-height:1.4;">
+    <div style="font-family:sans-serif; min-width:240px; line-height:1.4;">
       <div style="font-size:14px; font-weight:bold; color:${props.color}; margin-bottom:6px;">
         ${routeName}
       </div>
+      <div style="display:flex; justify-content:space-between; background:#f1f5f9; padding:5px 8px; border-radius:5px; margin-bottom:6px;">
+        <span style="font-size:11px; font-weight:bold; color:#475569;">${t.timeLabel}</span>
+        <span style="font-size:12px; font-weight:bold; color:#0f172a;">${props.time || '-'}</span>
+      </div>
       <div style="margin-bottom:6px;">
-        <span style="font-size:11px; font-weight:bold; color:#64748b;">${t.bordersLabel}</span><br>
-        <span style="font-size:12px; color:#1e293b;">${props.borders}</span>
+        <span style="font-size:10px; font-weight:bold; color:#64748b;">${t.regimeLabel}</span><br>
+        <span style="font-size:11px; color:#334155; font-weight:500;">${props.regime || '-'}</span>
+      </div>
+      <div style="margin-bottom:6px;">
+        <span style="font-size:10px; font-weight:bold; color:#64748b;">${t.bordersLabel}</span><br>
+        <span style="font-size:11px; color:#1e293b;">${props.borders}</span>
       </div>
       <div>
-        <span style="font-size:11px; font-weight:bold; color:#64748b;">${t.noteLabel}</span><br>
-        <span style="font-size:12px; color:#334155;">${props.notes}</span>
+        <span style="font-size:10px; font-weight:bold; color:#64748b;">${t.noteLabel}</span><br>
+        <span style="font-size:11px; color:#475569;">${props.notes}</span>
       </div>
     </div>
   `;

@@ -10,8 +10,8 @@
         "transit_time": "12-16 gün / 12-16 days",
         "customs": "TIR Karnesi / EAEU Transit",
         "borders": "Horgos/Alashankou -> Astana -> Petropavl -> Moskova / Moscow (M1) -> Minsk -> Brest / Malaszewicze",
-        "note_tr": "En kısa karayolu aksı; ancak Belarus-Polonya sınır kapılarında jeopolitik yaptırımlar, vize ve kota kısıtlamaları vardır.",
-        "note_en": "Shortest road axis; however, geopolitical sanctions, visa, and quota restrictions apply at Belarus-Poland border gates."
+        "note_tr": "En kısa karayolu aksı; ancak Belarus-Polonya sınır kapılarında yaptırımlar, vize ve kota kısıtlamaları vardır.",
+        "note_en": "Shortest road axis; however, sanctions, visa, and quota restrictions apply at Belarus-Poland border gates."
       },
       "geometry": {
         "type": "LineString",
@@ -29,12 +29,12 @@
       "type": "Feature",
       "properties": {
         "id": "middle",
-        "name": "Orta Koridor / Middle Corridor (TITR)",
+        "name": "Orta Koridor / Middle Corridor (Trans-Hazar / TITR)",
         "color": "#3b82f6",
         "transit_time": "14-22 gün / 14-22 days",
         "customs": "TIR Karnesi, CMR, Ro-Ro Konşimentosu / Bill of Lading",
-        "borders": "Horgos -> Aktau/Kuryk ~ Ro-Ro ~ Bakü / Baku -> Tiflis / Tbilisi -> Sarp/Türkgözü -> Kapıkule",
-        "note_tr": "Hazar geçişindeki hava muhalefeti ve liman operasyonları süreleri etkileyebilir.",
+        "borders": "Horgos/Alashankou -> Aktau/Kuryk ~ Ro-Ro ~ Bakü Alat -> Tiflis -> Sarp/Türkgözü -> Kapıkule",
+        "note_tr": "Hazar geçişindeki hava koşulları ve liman bekleme süreleri transit süreyi etkileyebilir.",
         "note_en": "Weather conditions in the Caspian Sea and port congestion can affect transit times."
       },
       "geometry": {
@@ -59,8 +59,8 @@
         "transit_time": "18-25 gün / 18-25 days",
         "customs": "TIR Karnesi, Dozvola (Geçiş İzni / Transit Permit)",
         "borders": "Karaçi / Karachi -> Quetta -> Taftan/Mirjaveh -> Tahran / Tehran -> Bazargan/Gürbulak -> Kapıkule",
-        "note_tr": "Taftan-Mirjaveh hattında güvenlik konvoyları ve altyapı darboğazları mevcuttur.",
-        "note_en": "Security convoys and infrastructure bottlenecks are present along the Taftan-Mirjaveh section."
+        "note_tr": "Taftan-Mirjaveh hattında konvoy zorunluluğu ve altyapı kısıtları mevcuttur.",
+        "note_en": "Security convoys and infrastructure constraints exist along the Taftan-Mirjaveh section."
       },
       "geometry": {
         "type": "LineString",
@@ -79,13 +79,13 @@
       "type": "Feature",
       "properties": {
         "id": "europe",
-        "name": "Avrupa Dağıtım Ağı / European Network",
+        "name": "Avrupa Dağıtım Ağı / European Distribution Network",
         "color": "#06b6d4",
         "transit_time": "4-6 gün / 4-6 days",
         "customs": "Ortak Transit (T1/T2), CMR",
         "borders": "Kapıkule -> Sofya -> Belgrad -> Budapeşte -> Viyana -> Passau -> Hamburg / Paris / Lizbon",
-        "note_tr": "AB sınır kapılarında (Kapıkule-Kaptan Andreevo) tır kuyrukları ve Schengen kontrolleri gecikme yaratabilir.",
-        "note_en": "EU entry points (Kapikule-Kapitan Andreevo) frequently experience truck queues and border checks."
+        "note_tr": "Kapıkule ve Schengen girişlerinde dönemsel yoğun tır kuyrukları görülebilir.",
+        "note_en": "Periodic truck queues may occur at Kapikule and Schengen entry points."
       },
       "geometry": {
         "type": "LineString",
@@ -98,6 +98,124 @@
           [9.9, 53.5],
           [2.3, 48.8],
           [-9.1, 38.7]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "italy_roro",
+        "name": "İtalya Ro-Ro Hattı / Italy Ro-Ro Line",
+        "color": "#8b5cf6",
+        "transit_time": "5-7 gün / 5-7 days",
+        "customs": "Intermodal T1, Ro-Ro Konşimentosu / Bill of Lading",
+        "borders": "Pendik/Yalova/Çeşme Limanı ~ Adriyatik Ro-Ro ~ Trieste -> Milano -> Mont Blanc -> Lyon / Paris",
+        "note_tr": "Haftalık gemi kalkış saatleri ve gemi rezervasyonları kritik öneme sahiptir.",
+        "note_en": "Weekly ship sailing schedules and booking confirmations are critical."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [29.2, 40.8],
+          [24.5, 38.0],
+          [13.8, 45.6],
+          [9.2, 45.5],
+          [6.8, 45.9],
+          [4.8, 45.7],
+          [2.3, 48.8]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "central_asia",
+        "name": "Orta Asya / Central Asia (AH7 Koridoru)",
+        "color": "#f59e0b",
+        "transit_time": "5-8 gün / 5-8 days",
+        "customs": "TIR Karnesi / EAEU Transit",
+        "borders": "Duşanbe -> Hucend -> Oybek -> Taşkent -> Şımkent -> Horgos",
+        "note_tr": "Bölgesel geçişlerde ikili geçiş izinleri ve sınır kontrolleri takip edilmelidir.",
+        "note_en": "Bilateral permits and border inspection times should be monitored."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [68.8, 38.5],
+          [69.6, 40.3],
+          [69.2, 41.3],
+          [69.6, 42.3],
+          [80.4, 44.2]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pamir",
+        "name": "Pamir / Kulma Koridoru (Pamir - Kulma Pass)",
+        "color": "#ec4899",
+        "transit_time": "4-7 gün / 4-7 days",
+        "customs": "TIR Karnesi, Özel Dağ Geçiş İzni / Mountain Permit",
+        "borders": "Kaşgar -> Kulma Geçidi (4.362 m) -> Murghab -> Horoğ -> Duşanbe",
+        "note_tr": "Yüksek rakım, sert kış şartları ve heyelan riski nedeniyle mevsimsel kapanmalar yaşanabilir.",
+        "note_en": "High altitude, severe winter conditions, and landslide risks may cause seasonal closures."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [75.9, 39.4],
+          [74.8, 38.1],
+          [73.9, 38.1],
+          [71.5, 37.5],
+          [68.8, 38.5]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "se_asia",
+        "name": "Güneydoğu Asya Besleme / Southeast Asia Feeder",
+        "color": "#14b8a6",
+        "transit_time": "10-14 gün / 10-14 days",
+        "customs": "ASEAN CBTA, GMS Transit",
+        "borders": "Hanoi / Bangkok -> Vientiane -> Mohan -> Kunming -> Urumçi -> Horgos",
+        "note_tr": "Çin gümrüklerinde tır ve konteyner aktarma prosedürleri uygulanmaktadır.",
+        "note_en": "Truck and container transshipment procedures apply at Chinese borders."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [100.5, 13.7],
+          [102.6, 17.9],
+          [101.7, 21.2],
+          [102.7, 25.0],
+          [87.6, 43.8],
+          [80.4, 44.2]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "india_multimodal",
+        "name": "Hindistan Multimodal / India Multimodal (INSTC)",
+        "color": "#6366f1",
+        "transit_time": "12-18 gün / 12-18 days",
+        "customs": "INSTC Transit, Deniz Konşimentosu / Sea Waybill",
+        "borders": "Nhava Sheva Limanı ~ Umman Denizi ~ Bender Abbas / Çabahar -> Yezd -> Tahran",
+        "note_tr": "Liman aktarma operasyonları ve demiryolu/karayolu entegrasyonu takip edilmelidir.",
+        "note_en": "Port transshipment schedules and road/rail integration must be coordinated."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [72.9, 18.9],
+          [60.6, 25.3],
+          [56.3, 27.2],
+          [54.3, 31.9],
+          [51.3, 35.6]
         ]
       }
     }

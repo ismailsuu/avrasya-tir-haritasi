@@ -1,7 +1,7 @@
 // Haritayı başlat
 const map = L.map('map').setView([42.0, 50.0], 4);
 
-// Standart, ücretsiz OpenStreetMap katmanı
+// Açık kaynaklı harita katmanı
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
   attribution: '© OpenStreetMap katkıda bulunanlar'
@@ -22,7 +22,10 @@ const I18N = {
       south: "Güney Koridoru (ITI)",
       asia_feed: "Güneydoğu Asya (Vietnam/Tayland)",
       central_asia: "Orta Asya (Tacikistan/AH7)",
-      europe_dist: "Avrupa Dağıtım Ağı (DE, DK, FR, PT)"
+      pamir_highway: "Pamir / Kulma (Çin-Tacikistan)",
+      india_feed: "Hindistan Multimodal (Deniz+Kara)",
+      europe_dist: "Avrupa Dağıtım Ağı (DE, DK, FR, PT)",
+      italy_roro: "İtalya Ro-Ro & Güney Avrupa"
     }
   },
   en: {
@@ -38,7 +41,10 @@ const I18N = {
       south: "Southern Corridor (ITI)",
       asia_feed: "Southeast Asia (Vietnam/Thailand)",
       central_asia: "Central Asia (Tajikistan/AH7)",
-      europe_dist: "Europe Distribution Network (DE, DK, FR, PT)"
+      pamir_highway: "Pamir / Kulma Pass (China-Tajik)",
+      india_feed: "India Multimodal (Sea+Road)",
+      europe_dist: "Europe Distribution Network",
+      italy_roro: "Italy Ro-Ro & Southern Europe"
     }
   }
 };
@@ -116,7 +122,7 @@ function renderRoutes() {
   filterRoutes();
 }
 
-// Menü filtresi
+// Filtreleme
 function filterRoutes() {
   const select = document.getElementById('routeSelect');
   if (!select || !routeLayer) return;
@@ -138,7 +144,7 @@ function filterRoutes() {
   }
 }
 
-// Veriyi yükle ve bağla
+// Veriyi yükle
 fetch('./corridors.geojson')
   .then(res => res.json())
   .then(data => {

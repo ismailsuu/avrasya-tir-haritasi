@@ -5,7 +5,7 @@ self.addEventListener('install', (e) => {
   self.skipWaiting();
 });
 
-// Eski önbelleklerin tamamını hafızadan sil
+// Eski sürüme ait tüm önbellekleri temizle ve kontrolü devral
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
@@ -21,20 +21,30 @@ self.addEventListener('activate', (e) => {
   self.clients.claim();
 });
 
-// Network First: Önce güncel dosyayı internetten çek, ağ yoksa önbellekten aç
+// Network First Stratejisi
 self.addEventListener('fetch', (e) => {
+  const req = e.request;
+
+  // 1. Sadece GET isteklerini ve http/https protokollerini işle
+  if (req.method !== 'GET' || !req.url.startsWith('http')) {
+    return;
+  }
+
   e.respondWith(
-    fetch(e.request)
+    fetch(req)
       .then((networkResponse) => {
-        // Gelen yeni dosyayı önbelleğe de yedekle
+        // Geçerli bir yanıt geldiyse (status 200) önbelleğe kaydet
         if (networkResponse && networkResponse.status === 200) {
           const responseToCache = networkResponse.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(e.request, responseToCache);
+            cache.put(req, responseToCache);
           });
         }
         return networkResponse;
       })
-      .catch(() => caches.match(e.request)) // İnternet kesilirse önbellekten ver
+      .catch(() => {
+        // Çevrimdışı (offline) durumunda önbellekten sun
+        return caches.match(req);
+      })
   );
 });

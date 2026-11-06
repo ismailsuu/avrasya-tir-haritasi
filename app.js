@@ -1,7 +1,7 @@
-// Haritayı Avrasya merkezli başlat (İstanbul / Kafkaslar hizası)
+// Haritayı Avrasya merkezli başlat
 const map = L.map('map').setView([42.0, 50.0], 4);
 
-// Açık kaynaklı OpenStreetMap altlığı
+// Açık kaynaklı harita altlığı
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
   attribution: '© OpenStreetMap katkıda bulunanlar'
@@ -10,7 +10,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // GeoJSON verisini çek ve haritaya ekle
 fetch('./corridors.geojson')
   .then(res => {
-    if (!res.ok) throw new Error("corridors.geojson dosyası bulunamadı!");
+    if (!res.ok) throw new Error("corridors.geojson yüklenemedi!");
     return res.json();
   })
   .then(data => {
@@ -48,7 +48,6 @@ fetch('./corridors.geojson')
       routeLayer.eachLayer(layer => {
         if (selected === 'all' || layer.feature.properties.id === selected) {
           layer.setStyle({ opacity: 0.85, weight: 4 });
-          // Seçili rota filtrelendiğinde popup'ı hazır tut
           if (selected !== 'all' && layer.feature.properties.id === selected) {
             map.fitBounds(layer.getBounds(), { padding: [50, 50] });
           }

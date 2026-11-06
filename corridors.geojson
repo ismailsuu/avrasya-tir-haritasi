@@ -4,172 +4,116 @@
     {
       "type": "Feature",
       "properties": {
+        "id": "northern",
+        "color": "#ef4444",
+        "name_tr": "Kuzey Koridoru (Avrasya)",
+        "name_en": "Northern Corridor (Eurasian)",
+        "transit_time_tr": "12-16 gün",
+        "transit_time_en": "12-16 days",
+        "customs_tr": "TIR Karnesi / EAEU Transit",
+        "customs_en": "TIR Carnet / EAEU Transit",
+        "borders_tr": "Horgos/Alashankou -> Astana -> Petropavl -> Moskova (M1) -> Minsk -> Brest / Malaszewicze",
+        "borders_en": "Horgos/Alashankou -> Astana -> Petropavl -> Moscow (M1) -> Minsk -> Brest / Malaszewicze",
+        "note_tr": "En kısa karayolu aksı; ancak Belarus-Polonya sınır kapılarında jeopolitik yaptırımlar, vize ve kota kısıtlamaları vardır.",
+        "note_en": "Shortest road axis; however, geopolitical sanctions, visa, and quota restrictions apply at Belarus-Poland border gates."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [80.4, 44.2],
+          [71.4, 51.1],
+          [69.1, 54.8],
+          [37.6, 55.7],
+          [27.5, 53.9],
+          [23.6, 52.0]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "id": "middle",
-        "name": "Orta Koridor (Trans-Hazar / TITR)",
-        "color": "#2563eb",
-        "time": "14-22 gün",
-        "regime": "TIR Karnesi / CMR / Ro-Ro konşimentosu",
-        "borders": "Horgos/Alashankou -> Aktau/Kuryk Limanı ~ Ro-Ro ~ Bakü Alat -> Tiflis -> Sarp/Türkgözü -> Kapıkule",
-        "notes": "Rusya'yı bypass eder. Hazar Denizi feribot bekleme süreleri transit süresini doğrudan etkiler."
+        "color": "#3b82f6",
+        "name_tr": "Orta Koridor (Trans-Hazar / TITR)",
+        "name_en": "Middle Corridor (Trans-Caspian / TITR)",
+        "transit_time_tr": "14-22 gün",
+        "transit_time_en": "14-22 days",
+        "customs_tr": "TIR Karnesi, CMR, Ro-Ro Konşimentosu",
+        "customs_en": "TIR Carnet, CMR, Ro-Ro Bill of Lading",
+        "borders_tr": "Horgos -> Aktau/Kuryk ~ Ro-Ro ~ Bakü Alat -> Tiflis -> Sarp/Türkgözü -> Kapıkule",
+        "borders_en": "Horgos -> Aktau/Kuryk ~ Ro-Ro ~ Baku Alat -> Tbilisi -> Sarp/Turkgozu -> Kapikule",
+        "note_tr": "Hazar geçişindeki hava muhalefeti ve liman operasyonları süreleri etkileyebilir.",
+        "note_en": "Weather conditions in the Caspian Sea and port congestion can affect transit times."
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [80.41, 44.21], [76.95, 43.22], [51.16, 43.65],
-          [49.86, 40.40], [44.78, 41.71], [41.55, 41.52],
-          [39.72, 41.00], [32.85, 39.93], [28.97, 41.00], [26.55, 41.67]
+          [80.4, 44.2],
+          [51.2, 43.6],
+          [50.0, 40.4],
+          [44.8, 41.7],
+          [41.5, 41.5],
+          [32.8, 39.9],
+          [26.5, 41.7]
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "id": "north",
-        "name": "Kuzey Koridoru (Avrasya)",
-        "color": "#dc2626",
-        "time": "12-16 gün",
-        "regime": "TIR Karnesi / EAEU Transit",
-        "borders": "Horgos/Alashankou -> Astana -> Petropavl -> Moskova (M1) -> Minsk -> Brest / Malaszewicze",
-        "notes": "En kısa karayolu aksı; ancak Belarus-Polonya sınır kapılarında jeopolitik yaptırımlar, vize ve kota kısıtlamaları vardır."
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [80.41, 44.21], [71.43, 51.16], [69.15, 54.87],
-          [61.40, 55.16], [37.61, 55.75], [27.56, 53.90], [23.68, 52.09]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "south",
-        "name": "Güney Koridoru (ITI - Pakistan/İran/Türkiye)",
-        "color": "#16a34a",
-        "time": "18-25 gün",
-        "regime": "TIR Karnesi / Dozvola (Geçiş Belgesi)",
-        "borders": "Karaçi -> Quetta -> Taftan/Mirjaveh -> Tahran -> Bazargan/Gürbulak -> Kapıkule",
-        "notes": "Kesintisiz karayolu omurgasıdır. Dozvola kotaları, akaryakıt farkı harçları ve çift şoför uygulaması zorunludur."
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [67.00, 24.86], [66.97, 30.17], [61.58, 28.97],
-          [51.38, 35.68], [46.29, 38.08], [44.38, 39.40],
-          [39.93, 39.75], [32.85, 39.93], [28.97, 41.00], [26.55, 41.67]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "asia_feed",
-        "name": "Güneydoğu Asya Besleme Hattı (AH1 / AH3)",
-        "color": "#eab308",
-        "time": "10-14 gün",
-        "regime": "GMS CBTA / İkili Taşıma İzinleri",
-        "borders": "Hanoi -> Lang Son | Bangkok -> Vientiane -> Boten/Mohan -> Kunming -> Urumçi -> Horgos",
-        "notes": "ASEAN yüklerinin Çin iç aksına bağlanarak Orta ve Kuzey koridorlarına aktarılmasını sağlar."
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [100.50, 13.75], [102.60, 17.97], [101.68, 21.18], [102.71, 25.04],
-          [105.85, 21.02], [106.76, 21.85], [102.71, 25.04],
-          [106.55, 29.56], [108.93, 34.34], [87.61, 43.82], [80.41, 44.21]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "central_asia",
-        "name": "Orta Asya Besleme Hattı (Tacikistan / AH7)",
-        "color": "#8b5cf6",
-        "time": "5-8 gün",
-        "regime": "BDT / EAEU Transit",
-        "borders": "Duşanbe -> Hucend -> Oybek Sınır Kapısı -> Taşkent -> Şımkent -> Horgos",
-        "notes": "Özbekistan ve Kazakistan üzerinden ana koridorlara entegrasyon."
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [68.78, 38.55], [69.24, 41.29], [69.59, 42.34], [76.95, 43.22], [80.41, 44.21]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "pamir_highway",
-        "name": "Pamir / Kulma Koridoru (Çin - Tacikistan)",
-        "color": "#ec4899",
-        "time": "4-7 gün",
-        "regime": "İkili Sınır Geçiş Rejimi",
-        "borders": "Kaşgar (Çin) -> Kulma Geçidi (4.362 m) -> Murghab -> Horoğ -> Duşanbe",
-        "notes": "Kışın ağır kar koşulları ve yüksek irtifa nedeniyle zincir/çekici kısıtlamaları uygulanır."
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [75.99, 39.47], [74.80, 38.15], [73.96, 38.17], [71.55, 37.49], [68.78, 38.55]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "india_feed",
-        "name": "Hindistan Multimodal Besleme Aksı",
-        "color": "#f97316",
-        "time": "12-18 gün",
-        "regime": "Multimodal B/L + TIR Karnesi",
-        "borders": "Nhava Sheva Limanı ~ Denizyolu ~ Bender Abbas / Çabahar -> Yezd -> Tahran",
-        "notes": "Wagah sınır engeli nedeniyle yükler Umman Denizi deniz hattıyla İran kara ağına ulaştırılır."
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [72.87, 19.07], [64.00, 22.00], [56.27, 27.18], [54.37, 31.89], [51.38, 35.68]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "europe_dist",
-        "name": "Avrupa Dağıtım Ağı (DE, DK, FR, PT)",
-        "color": "#06b6d4",
-        "time": "4-6 gün",
-        "regime": "Ortak Transit (T1 / T2) / CMR",
-        "borders": "Kapıkule -> Sofya (E80) -> Belgrad (E75) -> Budapeşte -> Viyana -> Passau -> Hamburg / Paris / Lizbon",
-        "notes": "AB içi AETR takograf sürüş limitleri ve hafta sonu sürüş yasakları uygulanır."
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [26.55, 41.67], [23.32, 42.69], [20.46, 44.78], [19.04, 47.49],
-          [16.37, 48.20], [13.43, 48.56], [9.99, 53.55], [9.43, 54.78],
-          [2.35, 48.85], [-0.57, 44.83], [-4.72, 41.65], [-9.13, 38.72]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "italy_roro",
-        "name": "İtalya Ro-Ro ve Güney Avrupa Hattı",
+        "id": "southern",
         "color": "#10b981",
-        "time": "5-7 gün",
-        "regime": "Intermodal T1 / Ro-Ro Manifestosu",
-        "borders": "Pendik/Yalova Limanı ~ Adriyatik Ro-Ro ~ Trieste -> Milano -> Mont Blanc -> Lyon / Paris",
-        "notes": "Balkan kara sınır kuyruklarını ve transit vizelerini baypas eden intermodal tır aksı."
+        "name_tr": "Güney Koridoru (ITI)",
+        "name_en": "Southern Corridor (ITI)",
+        "transit_time_tr": "18-25 gün",
+        "transit_time_en": "18-25 days",
+        "customs_tr": "TIR Karnesi, Dozvola (Geçiş İzni)",
+        "customs_en": "TIR Carnet, Dozvola (Transit Permit)",
+        "borders_tr": "Karaçi -> Quetta -> Taftan/Mirjaveh -> Tahran -> Bazargan/Gürbulak -> Kapıkule",
+        "borders_en": "Karachi -> Quetta -> Taftan/Mirjaveh -> Tehran -> Bazargan/Gurbulak -> Kapikule",
+        "note_tr": "Taftan-Mirjaveh hattında güvenlik konvoyları ve altyapı darboğazları mevcuttur.",
+        "note_en": "Security convoys and infrastructure bottlenecks are present along the Taftan-Mirjaveh section."
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [29.28, 40.87], [26.00, 39.50], [21.00, 37.00], [18.00, 40.00], [13.77, 45.65],
-          [9.19, 45.46], [6.86, 45.92], [4.83, 45.76], [2.35, 48.85]
+          [67.0, 24.8],
+          [66.9, 30.1],
+          [61.5, 28.9],
+          [51.3, 35.6],
+          [44.4, 39.4],
+          [32.8, 39.9],
+          [26.5, 41.7]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "europe",
+        "color": "#06b6d4",
+        "name_tr": "Avrupa Dağıtım Ağı",
+        "name_en": "European Distribution Network",
+        "transit_time_tr": "4-6 gün",
+        "transit_time_en": "4-6 days",
+        "customs_tr": "Ortak Transit (T1/T2), CMR",
+        "customs_en": "Common Transit (T1/T2), CMR",
+        "borders_tr": "Kapıkule -> Sofya -> Belgrad -> Budapeşte -> Viyana -> Passau -> Hamburg / Paris / Lizbon",
+        "borders_en": "Kapikule -> Sofia -> Belgrade -> Budapest -> Vienna -> Passau -> Hamburg / Paris / Lisbon",
+        "note_tr": "AB sınır kapılarında (Kapıkule-Kaptan Andreevo) tır kuyrukları ve Schengen kontrolleri gecikme yaratabilir.",
+        "note_en": "EU entry points (Kapikule-Kapitan Andreevo) frequently experience truck queues and Schengen border checks."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [26.5, 41.7],
+          [23.3, 42.6],
+          [20.4, 44.8],
+          [19.0, 47.4],
+          [16.3, 48.2],
+          [9.9, 53.5],
+          [2.3, 48.8],
+          [-9.1, 38.7]
         ]
       }
     }

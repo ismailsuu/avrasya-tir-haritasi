@@ -1,10 +1,10 @@
 // Haritayı başlat
 const map = L.map('map').setView([42.0, 50.0], 4);
 
-// Açık kaynaklı harita katmanı
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// Tüm şehir isimlerini İngilizce/Latin gösteren Esri katmanı (Ücretsiz & Filigransız)
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
   maxZoom: 18,
-  attribution: '© OpenStreetMap katkıda bulunanlar'
+  attribution: 'Tiles &copy; Esri &mdash; Sources: Esri, TomTom'
 }).addTo(map);
 
 // TR / EN Dil Sözlüğü
@@ -122,7 +122,7 @@ function renderRoutes() {
   filterRoutes();
 }
 
-// Filtreleme
+// Menü filtresi
 function filterRoutes() {
   const select = document.getElementById('routeSelect');
   if (!select || !routeLayer) return;

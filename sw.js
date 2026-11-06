@@ -1,25 +1,11 @@
-const CACHE_NAME = 'tir-koridor-v5';
-const ASSETS = [
-  './',
-  './index.html',
-  './app.js',
-  './manifest.json',
-  './corridors.geojson',
-  './icon-192.png',
-  './icon-512.png',
-  'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
-  'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
-];
+const CACHE_NAME = 'tir-koridor-v9-live';
 
-// Dosyaları önbelleğe al
+// Kurulum aşamasında bekleme yapmadan hemen devreye gir
 self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
-  );
   self.skipWaiting();
 });
 
-// Eski önbellekleri temizle
+// Eski önbelleklerin tamamını hafızadan sil
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
@@ -35,9 +21,20 @@ self.addEventListener('activate', (e) => {
   self.clients.claim();
 });
 
-// Ağdan veya önbellekten sun
+// Network First: Önce güncel dosyayı internetten çek, ağ yoksa önbellekten aç
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
+    fetch(e.request)
+      .then((networkResponse) => {
+        // Gelen yeni dosyayı önbelleğe de yedekle
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(e.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      })
+      .catch(() => caches.match(e.request)) // İnternet kesilirse önbellekten ver
   );
 });

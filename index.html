@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Avrasya Tır Koridorları PWA</title>
 
-  <!-- PWA ve İkon Ayarları -->
+  <!-- PWA ve İkon Tanımları -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icon-192.png">
   <link rel="apple-touch-icon" href="./icon-192.png">
@@ -22,60 +22,84 @@
   <style>
     * { box-sizing: border-box; }
     body, html {
-      margin: 0; padding: 0; height: 100%; width: 100%;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #0f172a; overflow: hidden;
+      background: #0f172a;
+      overflow: hidden;
     }
-    #map { height: 100vh; width: 100vw; z-index: 1; }
+    #map {
+      height: 100vh;
+      width: 100vw;
+      z-index: 1;
+    }
     .control-panel {
-      position: absolute; top: 14px; left: 14px; z-index: 1000;
-      background: rgba(30, 41, 59, 0.94); color: #f8fafc; padding: 14px;
-      border-radius: 12px; backdrop-filter: blur(8px);
-      width: calc(100% - 28px); max-width: 320px;
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 1000;
+      background: rgba(30, 41, 59, 0.92);
+      color: #f8fafc;
+      padding: 14px;
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      width: calc(100% - 28px);
+      max-width: 300px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .panel-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
     }
-    .panel-title {
-      display: flex; align-items: center; gap: 8px;
+    .panel-header h3 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
     }
-    .panel-title h3 {
-      margin: 0; font-size: 14px; font-weight: 600;
-    }
-    .lang-btn {
-      background: #334155; color: #38bdf8; border: 1px solid #475569;
-      padding: 4px 8px; font-size: 11px; font-weight: bold; border-radius: 6px;
-      cursor: pointer; transition: all 0.2s;
-    }
-    .lang-btn:hover { background: #475569; color: #fff; }
     label {
-      font-size: 11px; color: #94a3b8; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.5px;
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     select {
-      width: 100%; padding: 10px; margin-top: 6px; border-radius: 6px;
-      border: 1px solid #334155; background: #0f172a; color: #f8fafc;
-      font-size: 13px; outline: none; cursor: pointer;
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
     }
-    select:focus { border-color: #38bdf8; }
+    select:focus {
+      border-color: #38bdf8;
+    }
   </style>
 </head>
 <body>
 
   <div class="control-panel">
     <div class="panel-header">
-      <div class="panel-title">
-        <span style="font-size: 18px;">🚛</span>
-        <h3 id="uiTitle">Avrasya Tır Koridorları</h3>
-      </div>
-      <button id="langToggle" class="lang-btn">EN</button>
+      <span style="font-size: 20px;">🚛</span>
+      <h3>Avrasya Tır Koridorları</h3>
     </div>
-    
-    <label for="routeSelect" id="uiLabel">Güzergâh Seçin:</label>
-    <select id="routeSelect"></select>
+    <label for="routeSelect">Güzergâh Seçin:</label>
+    <select id="routeSelect">
+      <option value="all">Tüm Güzergâhlar</option>
+      <option value="middle">Orta Koridor (Trans-Hazar)</option>
+      <option value="north">Kuzey Koridoru</option>
+      <option value="south">Güney Koridoru</option>
+      <option value="europe_dist">Avrupa Dağıtım Ağı</option>
+    </select>
   </div>
 
   <div id="map"></div>

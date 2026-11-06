@@ -1,0 +1,48 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Orta Koridor (Trans-Hazar)",
+        "type": "middle",
+        "borders": "Kapıkule (TR/BG) -> Sarp (TR/GE) -> Bakü (AZ) -> Aktau/Türkmenbaşı -> Almatı -> Horgos (KZ/CN)"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [26.55, 41.67],
+          [28.97, 41.00],
+          [32.85, 39.93],
+          [41.55, 41.52],
+          [44.78, 41.71],
+          [49.86, 40.40],
+          [51.16, 43.65],
+          [69.59, 42.34],
+          [76.95, 43.22],
+          [80.41, 44.21]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kuzey Koridoru",
+        "type": "north",
+        "borders": "Polonya/Belarus -> Moskova -> Çelyabinsk -> Manzhouli (RU/CN)"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [21.01, 52.23],
+          [27.56, 53.90],
+          [37.61, 55.75],
+          [61.40, 55.16],
+          [82.93, 55.00],
+          [104.30, 52.28],
+          [117.43, 49.58]
+        ]
+      }
+    }
+  ]
+}
